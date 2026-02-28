@@ -1,42 +1,46 @@
-const fomulario = document.getElementById("formulario");
-const inputTarea= document.getElementById("tarea");
+
+       const formulario = document.getElementById("formulario");
+const inputTarea = document.getElementById("tarea");
 const lista = document.getElementById("lista");
 const contador = document.getElementById("contador");
-let totalTareas= 0;
-//evento sumut
+let totalTareas = 0;
 
-formulario.addEventlistener("sumit", function (event){
-    event.preventDefaul();
-    const texto = inputTarea.Value.trim();
-    if(texto === "") {
-        alert("por favor escribe una tarea");
+
+formulario.addEventListener("submit", function (event) {
+    event.preventDefault(); 
+    
+    const texto = inputTarea.value.trim();
+    if (texto === "") {
+        alert("Por favor escribe una tarea");
         return;
     }
-     agregarTarea (texto);
-     inputTarea.value= "";
-        
-    })
-    function agregarTarea(texto){
-        const li = document.getElementById("li");
-        li.textContent = texto;
+    
+    agregarTarea(texto);
+    inputTarea.value = ""; 
+});
 
-        const botonEliminar = document.getElementById("buton");
-        botonEliminar.textContent = "eliminar";
-        botonEliminar.classList.add("eliminar");
+function agregarTarea(texto) {
+    
+    const li = document.createElement("li"); 
+    li.textContent = texto + " ";
 
-        botonEliminar.addEventListener("click",
-            function(){
-                lista.removeChild(li);
-                totalTareas--;
-                actualizarContador();
-            });
+    const botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.classList.add("eliminar");
 
-            li.appendChild(botonEliminar);
-            lista.appendChild(li);
-            totalTareas++;
-            actualizarContador();
+    botonEliminar.addEventListener("click", function () {
+        lista.removeChild(li);
+        totalTareas--;
+        actualizarContador();
+    });
 
-    }
-    function actualizarContador(){
-        contador.textContent= totalTareas;
-    }
+    li.appendChild(botonEliminar);
+    lista.appendChild(li);
+    
+    totalTareas++;
+    actualizarContador();
+}
+
+function actualizarContador() {
+    contador.textContent = totalTareas;
+}
