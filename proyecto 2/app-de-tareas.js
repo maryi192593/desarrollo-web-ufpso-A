@@ -44,3 +44,4 @@ function agregarTarea(texto) {
 function actualizarContador() {
     contador.textContent = totalTareas;
 }
+
